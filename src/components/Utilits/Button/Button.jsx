@@ -1,6 +1,6 @@
-import { Component } from "react";
-import s from "./Button.module.scss";
-import PropTypes from "prop-types";
+import { Component } from 'react';
+import s from './Button.module.scss';
+import PropTypes from 'prop-types';
 
 export class Button extends Component {
   state = {};
@@ -17,6 +17,6 @@ export class Button extends Component {
 }
 
 Button.propTypes = {
-  title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  onClick: PropTypes.func,
 };

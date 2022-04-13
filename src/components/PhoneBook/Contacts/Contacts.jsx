@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import { Component } from "react";
-import { Item } from "components/Utilits";
+import PropTypes from 'prop-types';
+import { Component } from 'react';
+import { Item } from 'components/Utilits';
 
 class Contacts extends Component {
   render() {
@@ -8,7 +8,7 @@ class Contacts extends Component {
     return (
       <>
         <ul>
-          {items.map((item) => {
+          {items.map(item => {
             return (
               <Item
                 key={item.id}
@@ -24,11 +24,13 @@ class Contacts extends Component {
 }
 
 Contacts.propTypes = {
-  items: PropTypes.arrayOf({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-  }).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
   removeContact: PropTypes.func.isRequired,
 };
 

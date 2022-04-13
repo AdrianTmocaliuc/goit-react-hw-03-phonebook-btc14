@@ -1,6 +1,6 @@
-import { Button } from "..";
-import s from "./Item.module.scss";
-import PropTypes from "prop-types";
+import { Button } from '..';
+import s from './Item.module.scss';
+import PropTypes from 'prop-types';
 
 export const Item = ({
   statistic,
@@ -19,7 +19,7 @@ export const Item = ({
         </button>
       )}
       {statistic && (
-        <li style={{ textTransform: "capitalize" }}>
+        <li style={{ textTransform: 'capitalize' }}>
           {statistic[0]}: {statistic[1]}
         </li>
       )}
@@ -39,7 +39,7 @@ Item.propTypes = {
   handleClick: PropTypes.func,
   contactsList: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
+    number: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   }),
   removeContact: PropTypes.func,
