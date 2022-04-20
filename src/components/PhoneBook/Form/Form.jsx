@@ -5,7 +5,8 @@ import { Component } from "react";
 import s from "./Form.module.scss";
 import { nanoid } from "nanoid";
 
-class Form extends Component {
+
+class Form extends Component { 
   state = {
     name: "",
     number: "",

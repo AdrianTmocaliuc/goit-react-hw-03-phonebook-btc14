@@ -8,15 +8,16 @@ class Contacts extends Component {
     return (
       <>
         <ul>
-          {items.map(item => {
-            return (
-              <Item
-                key={item.id}
-                contactsList={item}
-                removeContact={removeContact}
-              />
-            );
-          })}
+          {items &&
+            items.map(item => {
+              return (
+                <Item
+                  key={item.id}
+                  contactsList={item}
+                  removeContact={removeContact}
+                />
+              );
+            })}
         </ul>
       </>
     );

@@ -1,24 +1,34 @@
-import { Section } from "components/Utilits";
-import { Component } from "react";
-import Contacts from "./Contacts/Contacts";
-import Filter from "./Filter/Filter";
-import Form from "./Form/Form";
+import { Section } from 'components/Utilits';
+import { Component } from 'react';
+import Contacts from './Contacts/Contacts';
+import Filter from './Filter/Filter';
+import Form from './Form/Form';
 
 class PhoneBook extends Component {
   state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
-    filter: "",
+    contacts: [],
+    filter: '',
   };
+  componentDidMount() {
+    const getContacts = localStorage.getItem('Contacts');
+    const contactsParse = JSON.parse(getContacts);
 
-  addContacts = (contact) => {
+    console.log(contactsParse);
+    if (contactsParse) {
+      this.setState({ contacts: contactsParse });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('Contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  addContacts = contact => {
     const { contacts } = this.state;
     const inputName = contact.name.toLowerCase();
-    const names = contacts.map((item) => item.name.toLowerCase());
+    const names = contacts.map(item => item.name.toLowerCase());
 
     if (names.includes(inputName)) {
       alert(`"${contact.name}" is already in contacts !`);
@@ -27,7 +37,7 @@ class PhoneBook extends Component {
     this.setState({ contacts: [...contacts, contact] });
   };
 
-  removeContact = (e) => {
+  removeContact = e => {
     const id = e.target.parentNode.id;
 
     const { contacts } = this.state;
@@ -36,7 +46,7 @@ class PhoneBook extends Component {
     // this.setState({ contacts: [...contacts].splice(index, 1) });
 
     this.setState({
-      contacts: contacts.filter((elem) => {
+      contacts: contacts.filter(elem => {
         return elem.id !== id;
       }),
     });
@@ -44,9 +54,11 @@ class PhoneBook extends Component {
 
   filterContacts = () => {
     const { contacts, filter } = this.state;
-    return contacts.filter((elem) => {
-      return elem.name.toLowerCase().includes(filter.toLowerCase());
-    });
+    if (contacts) {
+      return contacts.filter(elem => {
+        return elem.name.toLowerCase().includes(filter.toLowerCase());
+      });
+    }
   };
 
   onFilterInput = ({ target: { value: filter } }) => {
